@@ -1,4 +1,3 @@
-
 let bgOff = 'aaaa';
 function start(){
     removePage('home','hidden');
@@ -17,11 +16,17 @@ function getPreesKey(event){
     const getKey = event.key;
     const getLatter = document.getElementById('p-monitor').innerText.toLocaleLowerCase();
     if(getLatter === getKey){sum += 1;}
-    else{sub -= 1;}
+    else if(sub > 1){sub -= 1;}
+    else{
+        removePage('play-ground','hidden');
+        showPage('score', 'hidden');
+        inrTxt('final-s', sum);
+    }
     inrTxt('s-core', sum);
     inrTxt('l-ife', sub);
     arham();
 }
+
 document.addEventListener('keyup', getPreesKey);
 
 function run(){
@@ -33,3 +38,12 @@ function run(){
     bgOff = generateLatter;
     return generateLatter;
 }
+
+document.getElementById('p-again').addEventListener('click', function(){
+    removePage('score','hidden');
+    showPage('play-ground', 'hidden');
+    sum = 0;
+    inrTxt('s-core', sum);
+    sub = 3;
+    inrTxt('l-ife', 3);
+})
