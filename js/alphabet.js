@@ -1,49 +1,43 @@
-let bgOff = 'aaaa';
 function start(){
-    removePage('home','hidden');
-    showPage('play-ground','hidden');
-    arham();
+    changePage('home','play-ground');
+    continueGame();
 }
-function arham(){
-    const getLatter = run();
-    showPage('p-monitor','bg-teal-300');
-    inrTxt('p-monitor', getLatter);
-    removePage(getLatter,'bg-teal-300');
+function continueGame(){
+    const creatLatter = mathmatics();
+    inrTxt('p-monitor', creatLatter);
+    document.getElementById(creatLatter).classList.add('bg-teal-300');
 }
-let sum = 0; let sub = 3;
+let sum = 0; let sub = 5;
 function getPreesKey(event){
-    showPage(bgOff,'bg-teal-300');
-    const getKey = event.key;
-    const getLatter = document.getElementById('p-monitor').innerText.toLocaleLowerCase();
-    if(getLatter === getKey){sum += 1;}
-    else if(sub > 1){sub -= 1;}
-    else{
-        removePage('play-ground','hidden');
-        showPage('score', 'hidden');
-        inrTxt('final-s', sum);
+    const preesLatter = event.key;
+    const displayLatter = document.getElementById('p-monitor').innerText.toLocaleLowerCase();
+    removeElement(displayLatter,'bg-teal-300');
+    // document.getElementById(displayLatter).remove('bg-teal-300');
+    if(displayLatter === preesLatter){
+        sum += 1;
+        // continueGame();
     }
+    else if(preesLatter=== 'Escape'){
+        changePage('play-ground','home');}
+    else if(sub > 1){sub -= 1;}
+    else{changePage('play-ground','score');
+        inrTxt('final-s', sum);}
     inrTxt('s-core', sum);
     inrTxt('l-ife', sub);
-    arham();
+    continueGame();
 }
-
 document.addEventListener('keyup', getPreesKey);
-
-function run(){
-    const alfha ='abcdefghijklmnopqrstuvwxyz';
-    const latter =alfha.split("");
-    const rMath = Math.random() * 25;
-    const roundFiger = Math.round(rMath);
-    const generateLatter = latter[roundFiger];
-    bgOff = generateLatter;
-    return generateLatter;
+function mathmatics(){
+    const alfhabet ='abcdefghijklmnopqrstuvwxyz';
+    const latter =alfhabet.split("");
+    const randomDigit = Math.random() * 25;
+    const roundFiger = Math.round(randomDigit);
+    return latter[roundFiger];
 }
-
 document.getElementById('p-again').addEventListener('click', function(){
-    removePage('score','hidden');
-    showPage('play-ground', 'hidden');
+    changePage('score','play-ground');
     sum = 0;
     inrTxt('s-core', sum);
-    sub = 3;
-    inrTxt('l-ife', 3);
+    sub = 5;
+    inrTxt('l-ife', 5);
 })

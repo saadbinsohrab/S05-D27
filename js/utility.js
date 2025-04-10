@@ -1,9 +1,10 @@
-
-function removePage(event1,event2){
-    const homeSection = document.getElementById(event1);
-    homeSection.classList.add(event2);
+function changePage(event1,event2){
+    const re = document.getElementById(event1);
+    const sh = document.getElementById(event2);
+    re.classList.add('hidden');
+    sh.classList.remove('hidden');
 }
-function showPage(event3,event4){
+function removeElement(event3,event4){
     const playGround = document.getElementById(event3);
     playGround.classList.remove(event4);
 }
